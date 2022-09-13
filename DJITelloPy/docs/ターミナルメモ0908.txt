@@ -1,0 +1,317 @@
+Last login: Thu Sep  8 14:39:57 on ttys001
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+ryoupro:examples masudayouko$ python3 control-test.py
+[INFO] tello.py - 122 - Tello instance was initialized. Host: '192.168.10.1'. Port: '8889'.
+task2: t2
+[INFO] tello.py - 437 - Send command: 'command'
+[INFO] tello.py - 461 - Response command: 'ok'
+[INFO] tello.py - 437 - Send command: 'streamon'
+[INFO] tello.py - 461 - Response streamon: 'ok'
+2s
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] decode_slice_header error
+[h264 @ 0x7f9a6802a400] no frame!
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] decode_slice_header error
+[h264 @ 0x7f9a6802a400] no frame!
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] decode_slice_header error
+[h264 @ 0x7f9a6802a400] no frame!
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] decode_slice_header error
+[h264 @ 0x7f9a6802a400] no frame!
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] decode_slice_header error
+[h264 @ 0x7f9a6802a400] no frame!
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] decode_slice_header error
+[h264 @ 0x7f9a6802a400] no frame!
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] decode_slice_header error
+[h264 @ 0x7f9a6802a400] no frame!
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] decode_slice_header error
+[h264 @ 0x7f9a6802a400] no frame!
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] decode_slice_header error
+[h264 @ 0x7f9a6802a400] no frame!
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] decode_slice_header error
+[h264 @ 0x7f9a6802a400] no frame!
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] decode_slice_header error
+[h264 @ 0x7f9a6802a400] no frame!
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] decode_slice_header error
+[h264 @ 0x7f9a6802a400] no frame!
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] decode_slice_header error
+[h264 @ 0x7f9a6802a400] no frame!
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] decode_slice_header error
+[h264 @ 0x7f9a6802a400] no frame!
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] decode_slice_header error
+[h264 @ 0x7f9a6802a400] no frame!
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] non-existing PPS 0 referenced
+[h264 @ 0x7f9a6802a400] decode_slice_header error
+[h264 @ 0x7f9a6802a400] no frame!
+1s
+0s
+[h264 @ 0x7f9a6887c400] left block unavailable for requested intra mode
+[h264 @ 0x7f9a6887c400] error while decoding MB 0 31, bytestream 368
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/Users/masudayouko/.pyenv/versions/3.7.13/lib/python3.7/threading.py", line 926, in _bootstrap_inner
+    self.run()
+  File "control-test.py", line 23, in run
+    cv2.imshow("drone", img)
+cv2.error: Unknown C++ exception from OpenCV code
+
+Assertion failed: (NSViewIsCurrentlyBuildingLayerTreeForDisplay() != currentlyBuildingLayerTree), function NSViewSetCurrentlyBuildingLayerTreeForDisplay, file NSView.m, line 13477.
+[INFO] tello.py - 437 - Send command: 'streamoff'
+Illegal instruction: 4
+ryoupro:examples masudayouko$ python3 control-test.py
+[INFO] tello.py - 122 - Tello instance was initialized. Host: '192.168.10.1'. Port: '8889'.
+task2: t2
+[INFO] tello.py - 437 - Send command: 'command'
+[INFO] tello.py - 461 - Response command: 'ok'
+[INFO] tello.py - 437 - Send command: 'streamon'
+[INFO] tello.py - 461 - Response streamon: 'ok'
+2s
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] non-existing PPS 0 referenced
+[h264 @ 0x7f77f214e000] decode_slice_header error
+[h264 @ 0x7f77f214e000] no frame!
+1s
+0s
+[h264 @ 0x7f77f214da00] error while decoding MB 40 31, bytestream -6
+Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "/Users/masudayouko/.pyenv/versions/3.7.13/lib/python3.7/threading.py", line 926, in _bootstrap_inner
+    self.run()
+  File "control-test.py", line 23, in run
+    cv2.imshow("drone", img)
+cv2.error: Unknown C++ exception from OpenCV code
+
+Assertion failed: (NSViewIsCurrentlyBuildingLayerTreeForDisplay() != currentlyBuildingLayerTree), function NSViewSetCurrentlyBuildingLayerTreeForDisplay, file NSView.m, line 13477.
+[INFO] tello.py - 437 - Send command: 'streamoff'
+Illegal instruction: 4
+ryoupro:examples masudayouko$ python3 control-test.py
+^CImportError: numpy.core.multiarray failed to import
+Traceback (most recent call last):
+  File "control-test.py", line 3, in <module>
+    from djitellopy import Tello
+  File "/Users/masudayouko/.pyenv/versions/3.7.13/lib/python3.7/site-packages/djitellopy/__init__.py", line 1, in <module>
+    from .tello import Tello, BackgroundFrameRead
+  File "/Users/masudayouko/.pyenv/versions/3.7.13/lib/python3.7/site-packages/djitellopy/tello.py", line 11, in <module>
+    import cv2 # type: ignore
+  File "/Users/masudayouko/.pyenv/versions/3.7.13/lib/python3.7/site-packages/cv2/__init__.py", line 5, in <module>
+    from .cv2 import *
+ImportError: numpy.core.multiarray failed to import
+ryoupro:examples masudayouko$ python3 control-test.py
+[INFO] tello.py - 122 - Tello instance was initialized. Host: '192.168.10.1'. Port: '8889'.
+task2: t2
+[INFO] tello.py - 437 - Send command: 'command'
+[INFO] tello.py - 461 - Response command: 'ok'
+[INFO] tello.py - 437 - Send command: 'streamon'
+[INFO] tello.py - 461 - Response streamon: 'ok'
+[h264 @ 0x7f87b4956600] non-existing PPS 0 referenced
+[h264 @ 0x7f87b4956600] non-existing PPS 0 referenced
+[h264 @ 0x7f87b4956600] decode_slice_header error
+[h264 @ 0x7f87b4956600] no frame!
+[h264 @ 0x7f87b4956600] non-existing PPS 0 referenced
+[h264 @ 0x7f87b4956600] non-existing PPS 0 referenced
+[h264 @ 0x7f87b4956600] decode_slice_header error
+[h264 @ 0x7f87b4956600] no frame!
+[h264 @ 0x7f87b4956600] non-existing PPS 0 referenced
+[h264 @ 0x7f87b4956600] non-existing PPS 0 referenced
+[h264 @ 0x7f87b4956600] decode_slice_header error
+[h264 @ 0x7f87b4956600] no frame!
+[h264 @ 0x7f87b4956600] non-existing PPS 0 referenced
+[h264 @ 0x7f87b4956600] non-existing PPS 0 referenced
+[h264 @ 0x7f87b4956600] decode_slice_header error
+[h264 @ 0x7f87b4956600] no frame!
+[h264 @ 0x7f87b4956600] non-existing PPS 0 referenced
+[h264 @ 0x7f87b4956600] non-existing PPS 0 referenced
+[h264 @ 0x7f87b4956600] decode_slice_header error
+[h264 @ 0x7f87b4956600] no frame!
+[h264 @ 0x7f87b4956600] non-existing PPS 0 referenced
+[h264 @ 0x7f87b4956600] non-existing PPS 0 referenced
+[h264 @ 0x7f87b4956600] decode_slice_header error
+[h264 @ 0x7f87b4956600] no frame!
+[h264 @ 0x7f87b4956600] non-existing PPS 0 referenced
+[h264 @ 0x7f87b4956600] non-existing PPS 0 referenced
+[h264 @ 0x7f87b4956600] decode_slice_header error
+[h264 @ 0x7f87b4956600] no frame!
+[h264 @ 0x7f87b4956600] non-existing PPS 0 referenced
+[h264 @ 0x7f87b4956600] non-existing PPS 0 referenced
+[h264 @ 0x7f87b4956600] decode_slice_header error
+[h264 @ 0x7f87b4956600] no frame!
+2s
+1s
+0s
+2022-09-08 14:51:26.937 python3[2847:35454] *** Terminating app due to uncaught exception 'NSInternalInconsistencyException', reason: 'NSWindow drag regions should only be invalidated on the Main Thread!'
+*** First throw call stack:
+(
+	0   CoreFoundation                      0x00007ff81a4a0f0b __exceptionPreprocess + 242
+	1   libobjc.A.dylib                     0x00007ff81a201b9d objc_exception_throw + 48
+	2   CoreFoundation                      0x00007ff81a4c98ca -[NSException raise] + 9
+	3   AppKit                              0x00007ff81ce7b171 -[NSWindow(NSWindow_Theme) _postWindowNeedsToResetDragMarginsUnlessPostingDisabled] + 321
+	4   AppKit                              0x00007ff81ce66ee6 -[NSWindow _initContent:styleMask:backing:defer:contentView:] + 1287
+	5   AppKit                              0x00007ff81ce669d9 -[NSWindow initWithContentRect:styleMask:backing:defer:] + 42
+	6   AppKit                              0x00007ff81d148a8a -[NSWindow initWithContentRect:styleMask:backing:defer:screen:] + 50
+	7   cv2.cpython-37m-darwin.so           0x000000010b2e1cc5 cvNamedWindow + 677
+	8   cv2.cpython-37m-darwin.so           0x000000010b2e158c cvShowImage + 188
+	9   cv2.cpython-37m-darwin.so           0x000000010b2dfa56 _ZN2cv6imshowERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEERKNS_11_InputArrayE + 230
+	10  cv2.cpython-37m-darwin.so           0x000000010a5408ae _ZL18pyopencv_cv_imshowP7_objectS0_S0_ + 302
+	11  python3.7                           0x0000000105eb9e0a _PyMethodDef_RawFastCallKeywords + 730
+	12  python3.7                           0x0000000105eb9149 _PyCFunction_FastCallKeywords + 41
+	13  python3.7                           0x0000000105f8c286 call_function + 614
+	14  python3.7                           0x0000000105f889d3 _PyEval_EvalFrameDefault + 26691
+	15  python3.7                           0x0000000105eb95fb function_code_fastcall + 171
+	16  python3.7                           0x0000000105f8c30d call_function + 749
+	17  python3.7                           0x0000000105f889b9 _PyEval_EvalFrameDefault + 26665
+	18  python3.7                           0x0000000105eb95fb function_code_fastcall + 171
+	19  python3.7                           0x0000000105f8c30d call_function + 749
+	20  python3.7                           0x0000000105f889b9 _PyEval_EvalFrameDefault + 26665
+	21  python3.7                           0x0000000105eb95fb function_code_fastcall + 171
+	22  python3.7                           0x0000000105eba103 _PyObject_Call_Prepend + 131
+	23  python3.7                           0x0000000105eb9269 PyObject_Call + 137
+	24  python3.7                           0x0000000106019f28 t_bootstrap + 72
+	25  python3.7                           0x0000000105fce8a9 pythread_wrapper + 25
+	26  libsystem_pthread.dylib             0x00007ff81a35e4f4 _pthread_start + 125
+	27  libsystem_pthread.dylib             0x00007ff81a35a00f thread_start + 15
+)
+libc++abi: terminating with uncaught exception of type NSException
+Abort trap: 6
+ryoupro:examples masudayouko$ python --version
+Python 3.7.13
+ryoupro:examples masudayouko$
