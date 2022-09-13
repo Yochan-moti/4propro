@@ -48,21 +48,5 @@ async def hello():
                 print("<<< 左")
                 tello.move_left(30)
 
-            # if order[0]!=order[1]:
-            #     if order[1]=="FLY":
-            #         print("<<< 上昇")
-            #         tello.takeoff()
-            #     if order[1]=="DOWN":
-            #         print("<<< 着地")
-            #         tello.land()
-            #     if order[1]=="RIGHT":
-            #         print("<<< 右")
-            #         tello.move_right(30)
-            #     if order[1]=="LEFT":
-            #         print("<<< 左")
-            #         tello.move_left(30)
-            #     order[0] = order[1]
-            #     order[1] = 0
-
 
 asyncio.run(hello())

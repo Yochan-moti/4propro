@@ -1,6 +1,7 @@
 import threading
 import time
 import websockets
+import asyncio
 
 
 from djitellopy import Tello
@@ -22,7 +23,7 @@ class MyThread(threading.Thread):
         tello.connect()
         tello.streamon()
         frame_read = tello.get_frame_read()
-        tello.takeoff()
+        # tello.takeoff()
         while True:
             img = frame_read.frame
             cv2.imshow("drone", img)
@@ -63,15 +64,22 @@ class MyThread2(threading.Thread):
         super(MyThread2, self).__init__()
         self.n = n
 
-    # run()を書き直す
-    def run(self):
-        print("hello2")
-        with websockets.connect("ws://127.0.0.1:30000") as websocket:
+    async def hello(self):
+        print("hello,hello")
+        uri = "ws://127.0.0.1:30000"
+        async with websockets.connect(uri, ping_interval=None) as websocket:
             print(f"wait....")
             while True:
-                greeting = websocket.recv()
-                order[1] = greeting
+                print(f"wait....")
+                while True:
+                    greeting = websocket.recv()
+                    print(greeting)
+    # run()を書き直す
+    def run(self):
+        asyncio.run(self.hello())
 
+    # if __name__ == '__main__':
+    #     asyncio.run(run())
 
 t1 = MyThread("t1")
 t2 = MyThread2("t2")
