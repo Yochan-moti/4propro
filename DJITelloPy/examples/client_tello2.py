@@ -1,4 +1,3 @@
-import asyncio
 import websocket
 
 from concurrent.futures import ProcessPoolExecutor
@@ -54,8 +53,8 @@ def opecam():
 
     tello.land()
 
-async def teachable():
-    async  with websockets.connect("ws://127.0.0.1:30000") as websocket:
+def teachable():
+    with websockets.connect("ws://127.0.0.1:30000") as websocket:
         print(f"wait....")
         while True:
             greeting = websocket.recv()
