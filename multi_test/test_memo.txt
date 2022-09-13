@@ -1,0 +1,96 @@
+ryoupro:multi_test masudayouko$ python3 kurihara-test.py
+pygame 2.1.2 (SDL 2.0.18, Python 3.7.13)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+hello
+hello2
+[INFO] tello.py - 122 - Tello instance was initialized. Host: '192.168.10.1'. Port: '8889'.
+[INFO] tello.py - 437 - Send command: 'command'
+Exception in thread Thread-2:
+Traceback (most recent call last):
+  File "/Users/masudayouko/.pyenv/versions/3.7.13/lib/python3.7/threading.py", line 926, in _bootstrap_inner
+    self.run()
+  File "kurihara-test.py", line 69, in run
+    with websockets.connect("ws://127.0.0.1:30000") as websocket:
+  File "/Users/masudayouko/.pyenv/versions/3.7.13/lib/python3.7/site-packages/websockets/legacy/client.py", line 477, in __init__
+    loop = asyncio.get_event_loop()
+  File "/Users/masudayouko/.pyenv/versions/3.7.13/lib/python3.7/asyncio/events.py", line 644, in get_event_loop
+    % threading.current_thread().name)
+RuntimeError: There is no current event loop in thread 'Thread-2'.
+
+[ERROR] tello.py - 457 - 'utf-8' codec can't decode byte 0xcc in position 0: invalid continuation byte
+[INFO] tello.py - 437 - Send command: 'command'
+[INFO] tello.py - 461 - Response command: 'ok'
+[INFO] tello.py - 437 - Send command: 'streamon'
+[INFO] tello.py - 461 - Response streamon: 'ok'
+[h264 @ 0x7f8a5623a800] non-existing PPS 0 referenced
+[h264 @ 0x7f8a5623a800] non-existing PPS 0 referenced
+[h264 @ 0x7f8a5623a800] decode_slice_header error
+[h264 @ 0x7f8a5623a800] no frame!
+[h264 @ 0x7f8a5623a800] non-existing PPS 0 referenced
+[h264 @ 0x7f8a5623a800] non-existing PPS 0 referenced
+[h264 @ 0x7f8a5623a800] decode_slice_header error
+[h264 @ 0x7f8a5623a800] no frame!
+[h264 @ 0x7f8a5623a800] non-existing PPS 0 referenced
+[h264 @ 0x7f8a5623a800] non-existing PPS 0 referenced
+[h264 @ 0x7f8a5623a800] decode_slice_header error
+[h264 @ 0x7f8a5623a800] no frame!
+[h264 @ 0x7f8a5623a800] non-existing PPS 0 referenced
+[h264 @ 0x7f8a5623a800] non-existing PPS 0 referenced
+[h264 @ 0x7f8a5623a800] decode_slice_header error
+[h264 @ 0x7f8a5623a800] no frame!
+[h264 @ 0x7f8a5623a800] non-existing PPS 0 referenced
+[h264 @ 0x7f8a5623a800] non-existing PPS 0 referenced
+[h264 @ 0x7f8a5623a800] decode_slice_header error
+[h264 @ 0x7f8a5623a800] no frame!
+[h264 @ 0x7f8a5623a800] non-existing PPS 0 referenced
+[h264 @ 0x7f8a5623a800] non-existing PPS 0 referenced
+[h264 @ 0x7f8a5623a800] decode_slice_header error
+[h264 @ 0x7f8a5623a800] no frame!
+[h264 @ 0x7f8a5623a800] non-existing PPS 0 referenced
+[h264 @ 0x7f8a5623a800] non-existing PPS 0 referenced
+[h264 @ 0x7f8a5623a800] decode_slice_header error
+[h264 @ 0x7f8a5623a800] no frame!
+[h264 @ 0x7f8a5623a800] non-existing PPS 0 referenced
+[h264 @ 0x7f8a5623a800] non-existing PPS 0 referenced
+[h264 @ 0x7f8a5623a800] decode_slice_header error
+[h264 @ 0x7f8a5623a800] no frame!
+[h264 @ 0x7f8a5623a800] non-existing PPS 0 referenced
+[h264 @ 0x7f8a5623a800] non-existing PPS 0 referenced
+[h264 @ 0x7f8a5623a800] decode_slice_header error
+[h264 @ 0x7f8a5623a800] no frame!
+[INFO] tello.py - 437 - Send command: 'takeoff'
+[INFO] tello.py - 461 - Response takeoff: 'ok'
+2022-09-13 17:17:18.272 python3[4928:71317] *** Terminating app due to uncaught exception 'NSInternalInconsistencyException', reason: 'NSWindow drag regions should only be invalidated on the Main Thread!'
+*** First throw call stack:
+(
+	0   CoreFoundation                      0x00007ff8102e8f0b __exceptionPreprocess + 242
+	1   libobjc.A.dylib                     0x00007ff810049b9d objc_exception_throw + 48
+	2   CoreFoundation                      0x00007ff8103118ca -[NSException raise] + 9
+	3   AppKit                              0x00007ff812cc3171 -[NSWindow(NSWindow_Theme) _postWindowNeedsToResetDragMarginsUnlessPostingDisabled] + 321
+	4   AppKit                              0x00007ff812caeee6 -[NSWindow _initContent:styleMask:backing:defer:contentView:] + 1287
+	5   AppKit                              0x00007ff812cae9d9 -[NSWindow initWithContentRect:styleMask:backing:defer:] + 42
+	6   AppKit                              0x00007ff812f90a8a -[NSWindow initWithContentRect:styleMask:backing:defer:screen:] + 50
+	7   cv2.cpython-37m-darwin.so           0x000000010ce32cc5 cvNamedWindow + 677
+	8   cv2.cpython-37m-darwin.so           0x000000010ce3258c cvShowImage + 188
+	9   cv2.cpython-37m-darwin.so           0x000000010ce30a56 _ZN2cv6imshowERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEERKNS_11_InputArrayE + 230
+	10  cv2.cpython-37m-darwin.so           0x000000010c0918ae _ZL18pyopencv_cv_imshowP7_objectS0_S0_ + 302
+	11  python3.7                           0x0000000107a0ae0a _PyMethodDef_RawFastCallKeywords + 730
+	12  python3.7                           0x0000000107a0a149 _PyCFunction_FastCallKeywords + 41
+	13  python3.7                           0x0000000107add286 call_function + 614
+	14  python3.7                           0x0000000107ad99d3 _PyEval_EvalFrameDefault + 26691
+	15  python3.7                           0x0000000107a0a5fb function_code_fastcall + 171
+	16  python3.7                           0x0000000107add30d call_function + 749
+	17  python3.7                           0x0000000107ad99b9 _PyEval_EvalFrameDefault + 26665
+	18  python3.7                           0x0000000107a0a5fb function_code_fastcall + 171
+	19  python3.7                           0x0000000107add30d call_function + 749
+	20  python3.7                           0x0000000107ad99b9 _PyEval_EvalFrameDefault + 26665
+	21  python3.7                           0x0000000107a0a5fb function_code_fastcall + 171
+	22  python3.7                           0x0000000107a0b103 _PyObject_Call_Prepend + 131
+	23  python3.7                           0x0000000107a0a269 PyObject_Call + 137
+	24  python3.7                           0x0000000107b6af28 t_bootstrap + 72
+	25  python3.7                           0x0000000107b1f8a9 pythread_wrapper + 25
+	26  libsystem_pthread.dylib             0x00007ff8101a64f4 _pthread_start + 125
+	27  libsystem_pthread.dylib             0x00007ff8101a200f thread_start + 15
+)
+libc++abi: terminating with uncaught exception of type NSException
+Abort trap: 6
