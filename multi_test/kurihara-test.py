@@ -70,10 +70,9 @@ class MyThread2(threading.Thread):
         async with websockets.connect(uri, ping_interval=None) as websocket:
             print(f"wait....")
             while True:
-                print(f"wait....")
-                while True:
-                    greeting = websocket.recv()
-                    print(greeting)
+                greeting = await websocket.recv()
+                print(greeting)
+
     # run()を書き直す
     def run(self):
         asyncio.run(self.hello())
