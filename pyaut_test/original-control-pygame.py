@@ -129,9 +129,9 @@ class FrontEnd(object):
             self.up_down_velocity = S
         elif key == pygame.K_s:  # set down velocity　下降
             self.up_down_velocity = -S
-        elif key == pygame.K_a:  # set yaw counter clockwise velocity　反時計回り
+        elif key == pygame.K_a:  # set yaw counter clockwise velocity
             self.yaw_velocity = -S
-        elif key == pygame.K_d:  # set yaw clockwise velocity　時計回り
+        elif key == pygame.K_d:  # set yaw clockwise velocity
             self.yaw_velocity = S
 
     def keyup(self, key):

@@ -19,7 +19,7 @@ tello.connect()
 tello.streamon()
 frame_read = tello.get_frame_read()
 
-tello.takeoff()
+# tello.takeoff()
 
 while True:
     # In reality you want to display frames in a seperate thread. Otherwise
@@ -31,30 +31,20 @@ while True:
     key = cv2.waitKey(1) & 0xff
     if key == 27: # ESC
         break
-    elif key == ord('w'):
-        tello.move_forward(30)
-    elif key == ord('s'):
-        tello.move_back(30)
+
+    elif key == ord('t'):
+        tello.takeoff()
+    elif key == ord('l'):
+        tello.land()
     elif key == ord('a'):
         tello.move_left(30)
     elif key == ord('d'):
         tello.move_right(30)
-    elif key == ord('e'):
-        tello.rotate_clockwise(30)
-    elif key == ord('q'):
-        tello.rotate_counter_clockwise(30)
-    elif key == ord('r'):
-        tello.move_up(30)
-    elif key == ord('f'):
-        tello.move_down(30)
+    elif key == ord('m'):
+        tello.move_up(10)
+        tello.move_down(10)
+        tello.move_up(10)
+        tello.move_down(10)
 
-    elif key == ord('b'):
-        tello.flip_back()
-
-    elif key == ord('c'):
-        tello.flip_back()
-        tello.flip_forward()
-        tello.flip_left()
-        tello.flip_right()
 
 tello.land()

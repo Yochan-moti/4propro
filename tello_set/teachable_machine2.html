@@ -89,12 +89,12 @@
                 var n = data.length-1
                 var x = 0
                 if(data[n]==="RIGHT" && fly != 0){
-                  webSocket.send("RIGHT")
+                  webSocket.send("RIGHT")          //右
                 }else if(data[n]==="LEFT" && fly != 0){
-                  webSocket.send("LEFT")
+                  webSocket.send("LEFT")           //左
                 }else{
+                  // パタパタ認識
                   for (var i = 0; i < data.length-1; i++) {
-                    // data[i]
                     if((data[i]==="UP"&&data[i+1]==="DOWN")
                     ||(data[i]==="DOWN"&&data[i+1]==="UP")){
                       x++
@@ -102,19 +102,23 @@
                   }
 
                   if(x >= 6 && fly != 0){
-                    webSocket.send("FLY1")
+                    webSocket.send("SPEED")  //パタパタが6回以上　加速(前進？)
+                  }
+
+                  if(x >= 2 && fly != 0){
+                    webSocket.send("FLY1")　 //離陸状態でパタパタが2回以上 その位置でゆらゆら
                   }
 
                   if(x >= 2 && fly === 0){
                     fly++
-                    webSocket.send("FLY")
+                    webSocket.send("FLY")    //着陸状態でパタパタが2回以上　離陸
                   }
-
 
                   if(x < 2 &&fly != 0){
                     fly=0
-                    webSocket.send("LAND")
+                    webSocket.send("LAND")    //離陸状態でパタパタが2回未満　着陸
                   }
+
                 }
                 // webSocket.send()
                 data = [];
@@ -173,7 +177,6 @@
                      // webSocket.send("LEFT")
                    }
                  }
-
 
              }
 

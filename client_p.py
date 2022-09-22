@@ -8,13 +8,5 @@ async def hello():
         while True:
             greeting = await websocket.recv()
             print(f"<<< ",greeting)
-            # if(greeting=="UP"):
-            #     print(f"<<< UP")
-            # if(greeting=="RIGHT"):
-            #     print(f"<<< RIGHT")
-            # if(greeting=="LEFT"):
-            #     print(f"<<< LEFT")
-
-
 
 asyncio.run(hello())

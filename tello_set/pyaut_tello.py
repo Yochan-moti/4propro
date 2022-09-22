@@ -18,9 +18,13 @@ async def hello():
             if key == 27: # ESC
                 break
             if greeting=="FLY":
-                print("<<< 上昇")
+                print("<<< 離陸")
                 pyautogui.keyDown("t")
                 pyautogui.keyUp("t")
+            if greeting=="FLY1":
+                print("<<< ゆらゆら")
+                pyautogui.keyDown("m")
+                pyautogui.keyUp("m")
             if greeting=="LAND":
                 print("<<< 着地")
                 pyautogui.keyDown("l")
@@ -29,12 +33,10 @@ async def hello():
                 print("<<< 右")
                 pyautogui.keyDown("d")
                 pyautogui.keyUp("d")
-                # tello.move_right(30)
             if greeting=="LEFT":
                 print("<<< 左")
                 pyautogui.keyDown("a")
                 pyautogui.keyUp("a")
-                # tello.move_left(30)
 
 
 asyncio.run(hello())
