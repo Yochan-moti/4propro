@@ -1,14 +1,3 @@
-# simple example demonstrating how to control a Tello using your keyboard.
-# For a more fully featured example see manual-control-pygame.py
-#
-# Use W, A, S, D for moving, E, Q for rotating and R, F for going up and down.
-# When starting the script the Tello will takeoff, pressing ESC makes it land
-#  and the script exit.
-
-# キーボードを使用して Tello を操作する方法を示す簡単な例です。
-# より高度な機能を持つサンプルは manual-control-pygame.py を参照してください。
-# W, A, S, D で移動、E, Q で回転、R, F で上昇・下降します。
-# スクリプトを起動すると Tello は離陸し、ESC キーを押すと着陸してスクリプトは終了します。
 
 from djitellopy import Tello
 import cv2, math, time

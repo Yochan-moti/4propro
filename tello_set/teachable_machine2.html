@@ -107,6 +107,9 @@
 
                   if(x >= 2 && fly != 0){
                     webSocket.send("FLY1")　 //離陸状態でパタパタが2回以上 その位置でゆらゆら
+                    // sleep(3)
+                    // data=[]
+                    // webSocket.send("sleep, 3")
                   }
 
                   if(x >= 2 && fly === 0){
@@ -149,38 +152,29 @@
                      prediction[i].className + ": " + prediction[i].probability.toFixed(2);
                  labelContainer.childNodes[i].innerHTML = classPrediction;
 
-                 if(prediction[i].className=="UP"){
-                   if(prediction[i].probability.toFixed(2)=="1.00"){
+                 if(prediction[i].className==="UP"){
+                   if(prediction[i].probability.toFixed(2)==="1.00"){
                      data.push("UP")
-                     // data="UP"
-                     // webSocket.send("UP")
                    }
                  }
-                 if(prediction[i].className=="DOWN"){
-                   if(prediction[i].probability.toFixed(2)=="1.00"){
+                 if(prediction[i].className==="DOWN"){
+                   if(prediction[i].probability.toFixed(2)==="1.00"){
                      data.push("DOWN")
-                     // data="DOWN"
-                     // webSocket.send("DOWN")
                    }
                  }
-                 if(prediction[i].className=="RIGHT"){
-                   if(prediction[i].probability.toFixed(2)=="1.00"){
+                 if(prediction[i].className==="RIGHT"){
+                   if(prediction[i].probability.toFixed(2)==="1.00"){
                      data.push("RIGHT")
-                     // data="RIGHT"
-                     // webSocket.send("RIGHT")
                    }
                  }
-                 if(prediction[i].className=="LEFT"){
-                   if(prediction[i].probability.toFixed(2)=="1.00"){
+                 if(prediction[i].className==="LEFT"){
+                   if(prediction[i].probability.toFixed(2)==="1.00"){
                      data.push("LEFT")
-                     // data="LEFT"
-                     // webSocket.send("LEFT")
                    }
                  }
 
              }
 
-             // finally draw the poses
              drawPose(pose);
           }
 
@@ -189,7 +183,6 @@
           function drawPose(pose) {
              if (webcam.canvas) {
                  ctx.drawImage(webcam.canvas, 0, 0);
-                 // draw the keypoints and skeleton
                  if (pose) {
                      const minPartConfidence = 0.5;
                      tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx);
