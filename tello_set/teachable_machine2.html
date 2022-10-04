@@ -33,17 +33,66 @@
 <!-- ここからteachablemachine -->
 
     <div>Teachable Machine Pose Model</div>
-    <button type="button" onclick="init()">Start</button>
+    <form>
+      <!-- <input type="button" id="myButton" value="鳥モードOFF"
+       onclick="Buttontoggle();"> -->
+      <input type="button" id="myButton1" value="クラゲモードOFF"
+       onclick="Buttontoggle1();">
+      <input type="button" id="myButton2" value="ドラゴンモードOFF"
+       onclick="Buttontoggle2();">
+    </form>
+
+
+    <br><button type="button" onclick="init()">Start</button>
+
     <div><canvas id="canvas"></canvas></div>
     <div id="label-container"></div>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
     <script type="text/javascript">
+    var URL = "https://teachablemachine.withgoogle.com/models/A7O1o4hJ1/";
+
+　　
+    // function Buttontoggle()
+    // {
+    //   var t = document.getElementById("myButton");
+    //   if (t.value=="鳥モードOFF") {
+    //     t.value="鳥モードON";
+    //     URL = "https://teachablemachine.withgoogle.com/models/A7O1o4hJ1/";
+    //   }else if (t.value=="鳥モードON") {
+    //     t.value="鳥モードOFF";
+    //     URL = "";
+    //   }
+    // }
+    function Buttontoggle1()
+    {
+      var t = document.getElementById("myButton1");
+      if (t.value=="クラゲモードOFF") {
+        t.value="クラゲモードON";
+        URL = "https://teachablemachine.withgoogle.com/models/uqWPooEQx/";
+      }else if (t.value=="クラゲモードON") {
+        t.value="クラゲモードOFF";
+        URL = "";
+      }
+    }
+    function Buttontoggle2()
+    {
+      var t = document.getElementById("myButton2");
+      if (t.value=="ドラゴンモードOFF") {
+        t.value="ドラゴンモードON";
+      }else if (t.value=="ドラゴンモードON") {
+        t.value="ドラゴンモードOFF";
+        URL = "";
+      }
+    }
+    　　　　
+
           // More API functions here:
           // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose
           // the link to your model provided by Teachable Machine export panel
           // const URL = "https://teachablemachine.withgoogle.com/models/gRWcvQapv/";
-          const URL = "https://teachablemachine.withgoogle.com/models/A7O1o4hJ1/";
+          // const URL = "https://teachablemachine.withgoogle.com/models/A7O1o4hJ1/";
+          
           let model, webcam, ctx, labelContainer, maxPredictions;
 
           var data=[]

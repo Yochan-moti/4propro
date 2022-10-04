@@ -25,8 +25,6 @@ async def hello():
                 print("<<< ゆらゆら")
                 pyautogui.keyDown("m")
                 pyautogui.keyUp("m")
-                # sleep(3)
-                # print("sleep,3")
             if greeting=="LAND":
                 print("<<< 着地")
                 pyautogui.keyDown("l")
