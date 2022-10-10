@@ -92,7 +92,7 @@
           // the link to your model provided by Teachable Machine export panel
           // const URL = "https://teachablemachine.withgoogle.com/models/gRWcvQapv/";
           // const URL = "https://teachablemachine.withgoogle.com/models/A7O1o4hJ1/";
-          
+
           let model, webcam, ctx, labelContainer, maxPredictions;
 
           var data=[]
@@ -156,9 +156,6 @@
 
                   if(x >= 2 && fly != 0){
                     webSocket.send("FLY1")　 //離陸状態でパタパタが2回以上 その位置でゆらゆら
-                    // sleep(3)
-                    // data=[]
-                    // webSocket.send("sleep, 3")
                   }
 
                   if(x >= 2 && fly === 0){

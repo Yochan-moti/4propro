@@ -96,8 +96,10 @@
           let model, webcam, ctx, labelContainer, maxPredictions;
 
           var data=[]
-          // var data=""
+
           var fly=false
+
+          var push=false
 
           async function init() {
             const modelURL = URL + "model.json";
@@ -135,9 +137,13 @@
 
             //--------タイマー処理----------------
             var manager = async function () {
-              if (data !==[]) {
-                var n = data.length-1;
+              if (data !=　[] && push===true) {
+                while(data.length>30){     // データの数を調整(30個以内に)
+                  data.shift();　　　　　　　// 入れ替わりがなければ以前のデータ配列をずっと使ってしまうため、データの追加が行われれば実行される
+                }
+
                 console.log(data);
+                var n = data.length-1;
                 var x = 0;
                 if(data[n]==="RIGHT" && fly === true){
                   webSocket.send("RIGHT");          //右
@@ -152,26 +158,30 @@
                     }
                   }
 
-                  if(x >= 3 && fly === false){
+                  if(x >= 2 && fly === true){
+                    webSocket.send("YURA");    //離陸状態でパタパタが2回以上　ゆらゆら
+                  }
+
+                  if(x >= 2 && fly === false){
                     fly = true;
                     webSocket.send("FLY");    //着陸状態でパタパタが2回以上　離陸
                   }
+                  
 
-                  if(x < 3 &&fly === true){
+                  if(x < 2 &&fly === true){
                     fly = false;
                     webSocket.send("LAND");    //離陸状態でパタパタが2回未満　着陸
                   }
 
                 }
-                data.shift();
-
               }
+              push = false
             }
             console.log('開始');
-            await new Promise(s => setTimeout(s, 6000));
-            console.log('開始から3秒経過');
+            await new Promise(s => setTimeout(s, 4000));
+            console.log('開始から4秒経過');
 
-            setInterval(manager, 1000/10);
+            setInterval(manager, 1000/3);
             //-----------------------------------
 
           }
@@ -179,9 +189,7 @@
           var a = 0;
 
           async function loop(timestamp) {
-            await new Promise(loop => setTimeout(loop, 1000/30));
-            a += 1;
-            console.log(a);
+            await new Promise(loop => setTimeout(loop, 1000/90));
 
             webcam.update(); // update the webcam frame
             await predict();
@@ -204,22 +212,26 @@
 
                  if(prediction[i].className==="UP"){
                    if(prediction[i].probability.toFixed(2)==="1.00"){
-                     data.push("UP")
+                     data.push("UP");
+                     push=true;
                    }
                  }
                  if(prediction[i].className==="DOWN"){
                    if(prediction[i].probability.toFixed(2)==="1.00"){
-                     data.push("DOWN")
+                     data.push("DOWN");
+                     push=true;
                    }
                  }
                  if(prediction[i].className==="RIGHT"){
                    if(prediction[i].probability.toFixed(2)==="1.00"){
-                     data.push("RIGHT")
+                     data.push("RIGHT");
+                     push=true;
                    }
                  }
                  if(prediction[i].className==="LEFT"){
                    if(prediction[i].probability.toFixed(2)==="1.00"){
-                     data.push("LEFT")
+                     data.push("LEFT");
+                     push=true;
                    }
                  }
 
