@@ -137,9 +137,9 @@
 
             //--------タイマー処理----------------
             var manager = async function () {
-              if (data !=　[] && push===true) {
+              if (data !=　[] && push===true) {// 入れ替わりがなければ以前のデータ配列をずっと使ってしまうため、データの追加が行われれば認識が実行される
                 while(data.length>30){     // データの数を調整(30個以内に)
-                  data.shift();　　　　　　　// 入れ替わりがなければ以前のデータ配列をずっと使ってしまうため、データの追加が行われれば実行される
+                  data.shift();　　　　　　　
                 }
 
                 console.log(data);
@@ -158,19 +158,18 @@
                     }
                   }
 
-                  if(x >= 2 && fly === true){
-                    webSocket.send("YURA");    //離陸状態でパタパタが2回以上　ゆらゆら
+                  if(x >= 3 && fly === true){
+                    webSocket.send("YURA");    //離陸状態でパタパタが3回以上　ゆらゆら
                   }
 
-                  if(x >= 2 && fly === false){
+                  if(x >= 3 && fly === false){
                     fly = true;
-                    webSocket.send("FLY");    //着陸状態でパタパタが2回以上　離陸
+                    webSocket.send("FLY");    //着陸状態でパタパタが3回以上　離陸
                   }
-                  
 
-                  if(x < 2 &&fly === true){
+                  if(x < 3 &&fly === true){
                     fly = false;
-                    webSocket.send("LAND");    //離陸状態でパタパタが2回未満　着陸
+                    webSocket.send("LAND");    //離陸状態でパタパタが3回未満　着陸
                   }
 
                 }
