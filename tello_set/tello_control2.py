@@ -1,6 +1,10 @@
 from djitellopy import Tello
 import cv2
+
+from pygame.locals import *
 import pygame
+import sys
+
 import numpy as np
 import time
 
@@ -11,6 +15,59 @@ S = 20
 # A low number also results in input lag, as input information is processed once per frame.
 # pygameのウィンドウ表示の1秒あたりのフレーム数。入力情報は1フレームに1回処理されるため、数値が低いと入力遅延も発生します。
 FPS = 120
+
+############################
+### スプライトクラス継承
+############################
+class MySprite(pygame.sprite.Sprite):
+
+    ############################
+    ### 初期化メソッド(ファイル名,X軸,Y軸,X軸移動,Y軸移動)
+    ############################
+    def __init__(self, name, x, y, mv_x, mv_y):
+        pygame.sprite.Sprite.__init__(self)
+
+        ### 透過変換でファイル読み込み
+        self.image = pygame.image.load(name).convert_alpha()
+
+        ### 画像サイズ変更
+        self.image = pygame.transform.scale(self.image, (200, 200))
+
+        ### 画像サイズ取得
+        width  = self.image.get_width()
+        height = self.image.get_height()
+
+        ### 四角形オブジェクト生成
+        self.rect = Rect(x, y, width, height)
+
+        ### 移動位置設定
+        self.mv_x = mv_x
+        self.mv_y = mv_y
+
+    ############################
+    ### 画面更新
+    ############################
+    def update(self):
+
+        ### 移動描写
+        self.rect.move_ip(self.mv_x, self.mv_y)
+
+        ### 画面の範囲外ならオブジェクト移動位置を反転
+        if self.rect.left < 0 or self.rect.right  > 960:
+            self.mv_x = -self.mv_x
+        if self.rect.top  < 0 or self.rect.bottom > 720:
+            self.mv_y = -self.mv_y
+
+        ### 画面内に収める
+        self.rect = self.rect.clamp(Rect(0,0,960,720))
+
+    ############################
+    ### オブジェクト描画
+    ############################
+    def draw(self, surface):
+        surface.blit(self.image, self.rect)
+
+
 
 class FrontEnd(object):
     """ Maintains the Tello display and moves it through the keyboard keys.
@@ -33,6 +90,7 @@ class FrontEnd(object):
 
     """
 
+
     def __init__(self):
         # Init pygame
         pygame.init()
@@ -40,6 +98,14 @@ class FrontEnd(object):
         # Creat pygame window
         pygame.display.set_caption("Tello video stream")
         self.screen = pygame.display.set_mode([960, 720])
+
+        self.img1 = MySprite("honoo.png",   0,   0, 8, 2)
+        self.img2 = MySprite("honoo.png", 100, 100, 6, 4)
+        self.img3 = MySprite("honoo.png", 200, 200, 4, 6)
+        self.img4 = MySprite("honoo.png", 300, 300, 2, 8)
+
+        ### グループ設定
+        self.img_grp = pygame.sprite.Group()
 
         # Init Tello object that interacts with the Tello drone
         # Telloドローンと対話するためのTelloオブジェクトを初期化する。
@@ -105,6 +171,12 @@ class FrontEnd(object):
 
             frame = pygame.surfarray.make_surface(frame)
             self.screen.blit(frame, (0, 0))
+
+            ### スプライトを更新
+            self.img_grp.update()
+            ### スプライトを描画
+            self.img_grp.draw(self.screen)
+
             pygame.display.update()
 
             time.sleep(1 / FPS)
@@ -135,6 +207,9 @@ class FrontEnd(object):
             self.yaw_velocity = -S
         elif key == pygame.K_d:  # set yaw clockwise velocity　時計回り
             self.yaw_velocity = S
+        elif key == pygame.K_m:
+            self.img_grp = pygame.sprite.Group(self.img1, self.img2, self.img3, self.img4)
+
 
     def keyup(self, key):
         """
@@ -156,6 +231,9 @@ class FrontEnd(object):
         elif key == pygame.K_l:  # land
             not self.tello.land()
             self.send_rc_control = False
+        elif key == pygame.K_m:
+            self.img_grp = pygame.sprite.Group()
+
 
     def update(self):
         """
