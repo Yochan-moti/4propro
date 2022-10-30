@@ -9,7 +9,7 @@ async def hello():
     data = [0]*2
     async with websockets.connect(uri, ping_interval=None) as websocket:
         print(f"wait....")
-        
+
         while True:
             greeting = await websocket.recv()
 
@@ -23,13 +23,24 @@ async def hello():
             if key == 27: # ESC
                 break
 
-            if data[0] != data[1]:       # 受信内容が切り替わらない限り押しっぱなし
+            if data[0] != data[1]:
                 if data[0]=="RIGHT":
                     print("<<< 右終わり")
                     pyautogui.keyUp("right")
+                    pyautogui.keyUp("up")
                 if data[0]=="LEFT":
                     print("<<< 左終わり")
                     pyautogui.keyUp("left")
+                    pyautogui.keyUp("up")
+                if data[0]=="R_ROTATE":
+                    print("<<< 右回転終わり")
+                    pyautogui.keyUp("d")
+                if data[0]=="L_ROTATE":
+                    print("<<< 左回転終わり")
+                    pyautogui.keyUp("a")
+                if data[0]=="GO":
+                    print("<<< 直進終わり")
+                    pyautogui.keyUp("up")
 
                 if data[1]=="FLY":
                     print("<<< 離陸")
@@ -41,16 +52,25 @@ async def hello():
                     pyautogui.keyUp("l")
                 if data[1]=="YURA":
                     print("<<< ゆらゆら")
-                    # pyautogui.keyDown("t")
-                    # pyautogui.keyUp("t")
-
+                #     # pyautogui.keyDown("t")
+                #     # pyautogui.keyUp("t")
                 if data[1]=="RIGHT":
                     print("<<< 右")
                     pyautogui.keyDown("right")
-
+                    pyautogui.keyDown("up")
                 if data[1]=="LEFT":
                     print("<<< 左")
                     pyautogui.keyDown("left")
+                    pyautogui.keyDown("up")
+                if data[1]=="R_ROTATE":
+                    print("<<< 右回転")
+                    pyautogui.keyDown("d")
+                if data[1]=="L_ROTATE":
+                    print("<<< 左回転")
+                    pyautogui.keyDown("a")
+                if data[1]=="GO":
+                    print("<<< 直進")
+                    pyautogui.keyDown("up")
 
 
 

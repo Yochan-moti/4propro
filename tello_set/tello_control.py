@@ -59,6 +59,9 @@ class FrontEnd(object):
         # アップロードタイマーを作成
         pygame.time.set_timer(pygame.USEREVENT + 1, 1000 // FPS)
 
+        self.honoo = pygame.image.load(gazo)
+        self.honoo = pygame.transform.scale(self.honoo, (200, 200))
+
     def run(self):
 
         self.tello.connect()
@@ -103,6 +106,7 @@ class FrontEnd(object):
 
             frame = pygame.surfarray.make_surface(frame)
             self.screen.blit(frame, (0, 0))
+            self.screen.blit(self.honoo, (0, 0))
             pygame.display.update()
 
             time.sleep(1 / FPS)
@@ -133,6 +137,9 @@ class FrontEnd(object):
             self.yaw_velocity = -S
         elif key == pygame.K_d:  # set yaw clockwise velocity　時計回り
             self.yaw_velocity = S
+        elif key == pygame.K_m:
+            gazo = "honoo_hi_fire.png"
+
 
     def keyup(self, key):
         """
@@ -154,6 +161,10 @@ class FrontEnd(object):
         elif key == pygame.K_l:  # land
             not self.tello.land()
             self.send_rc_control = False
+        elif key == pygame.K_m:
+            gazo = ""
+
+
 
     def update(self):
         """
