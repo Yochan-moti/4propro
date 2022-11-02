@@ -16,6 +16,8 @@ S = 20
 # pygameのウィンドウ表示の1秒あたりのフレーム数。入力情報は1フレームに1回処理されるため、数値が低いと入力遅延も発生します。
 FPS = 120
 
+gazo = "honoo.png"
+
 ############################
 ### スプライトクラス継承
 ############################
@@ -91,6 +93,7 @@ class FrontEnd(object):
     """
 
 
+
     def __init__(self):
         # Init pygame
         pygame.init()
@@ -99,10 +102,12 @@ class FrontEnd(object):
         pygame.display.set_caption("Tello video stream")
         self.screen = pygame.display.set_mode([960, 720])
 
-        self.img1 = MySprite("honoo.png",   0,   0, 8, 2)
-        self.img2 = MySprite("honoo.png", 100, 100, 6, 4)
-        self.img3 = MySprite("honoo.png", 200, 200, 4, 6)
-        self.img4 = MySprite("honoo.png", 300, 300, 2, 8)
+        self.img1 = MySprite(gazo,   0,   0, 8, 2)
+        self.img2 = MySprite(gazo, 100, 100, 6, 4)
+        self.img3 = MySprite(gazo, 200, 200, 4, 6)
+        self.img4 = MySprite(gazo, 300, 300, 2, 8)
+
+        self.cry_sound = pygame.mixer.Sound("dragon.mp3")
 
         ### グループ設定
         self.img_grp = pygame.sprite.Group()
@@ -209,6 +214,11 @@ class FrontEnd(object):
             self.yaw_velocity = S
         elif key == pygame.K_m:
             self.img_grp = pygame.sprite.Group(self.img1, self.img2, self.img3, self.img4)
+            self.cry_sound.play()
+        elif key == pygame.K_k:
+            gazo = "kaminari.png"
+        elif key == pygame.K_b:
+            gazo = "kaze.png"
 
 
     def keyup(self, key):

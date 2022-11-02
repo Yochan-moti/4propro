@@ -24,6 +24,9 @@ async def hello():
                 break
 
             if data[0] != data[1]:
+                if data[0]=="YURA":
+                    print("<<< ゆらゆら終わり")
+                    pyautogui.keyUp("m")
                 if data[0]=="RIGHT":
                     print("<<< 右終わり")
                     pyautogui.keyUp("right")
@@ -42,6 +45,7 @@ async def hello():
                     print("<<< 直進終わり")
                     pyautogui.keyUp("up")
 
+
                 if data[1]=="FLY":
                     print("<<< 離陸")
                     pyautogui.keyDown("t")
@@ -50,10 +54,11 @@ async def hello():
                     print("<<< 着地")
                     pyautogui.keyDown("l")
                     pyautogui.keyUp("l")
+
+
                 if data[1]=="YURA":
                     print("<<< ゆらゆら")
-                #     # pyautogui.keyDown("t")
-                #     # pyautogui.keyUp("t")
+                    pyautogui.keyDown("m")
                 if data[1]=="RIGHT":
                     print("<<< 右")
                     pyautogui.keyDown("right")
@@ -71,6 +76,16 @@ async def hello():
                 if data[1]=="GO":
                     print("<<< 直進")
                     pyautogui.keyDown("up")
+
+
+                if data[1]=="kurage":
+                    print("<<< クラゲモードON")
+                    pyautogui.keyDown("k")
+                    pyautogui.keyUp("k")
+                if data[1]=="tori":
+                    print("<<< 鳥モードON")
+                    pyautogui.keyDown("b")
+                    pyautogui.keyUp("b")
 
 
 
