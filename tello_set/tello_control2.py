@@ -115,6 +115,8 @@ class FrontEnd(object):
         self.img_k3 = MySprite("kaminari.png", 200, 200, 4, 6)
         self.img_k4 = MySprite("kaminari.png", 300, 300, 2, 8)
         self.cry_sound_kurage = pygame.mixer.Sound("kaminari.mp3")
+        # self.kurage_BGM = pygame.mixer.Sound("kurage_BGM.mp3")
+
 
         # 鳥エフェクト
         self.img_t1 = MySprite("kaze.png",   0,   0, 8, 2)
@@ -229,15 +231,19 @@ class FrontEnd(object):
             self.yaw_velocity = -S
         elif key == pygame.K_d:  # set yaw clockwise velocity　時計回り
             self.yaw_velocity = S
-        elif key == pygame.K_m:
+
+        elif key == pygame.K_m:  # ドラゴンエフェクト＆効果音
             self.img_grp = pygame.sprite.Group(self.img1, self.img2, self.img3, self.img4)
             self.cry_sound.play()
-        elif key == pygame.K_k:
+        elif key == pygame.K_k:  #　クラゲエフェクト＆効果音
             self.img_grp = pygame.sprite.Group(self.img_k1, self.img_k2, self.img_k3, self.img_k4)
             self.cry_sound_kurage.play()
-        elif key == pygame.K_b:
+        elif key == pygame.K_b:  #　鳥エフェクト＆効果音
             self.img_grp = pygame.sprite.Group(self.img_t1, self.img_t2, self.img_t3, self.img_t4)
             self.cry_sound_tori.play()
+
+        # elif key == pygame.K_r:  #　クラゲBGM
+        #     self.kurage_BGM.play(-1)
 
 
     def keyup(self, key):

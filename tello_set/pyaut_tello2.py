@@ -97,12 +97,12 @@ async def hello():
 
                 if data[1]=="kurage":
                     print("<<< クラゲモードON")
-                    # pyautogui.keyDown("k")
-                    # pyautogui.keyUp("k")
+                    pyautogui.keyDown("r")
+                    pyautogui.keyUp("r")
                 if data[1]=="tori":
                     print("<<< 鳥モードON")
-                    # pyautogui.keyDown("b")
-                    # pyautogui.keyUp("b")
+                    pyautogui.keyDown("i")
+                    pyautogui.keyUp("i")
 
 
 
