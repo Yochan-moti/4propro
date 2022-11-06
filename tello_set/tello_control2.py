@@ -16,7 +16,6 @@ S = 20
 # pygameのウィンドウ表示の1秒あたりのフレーム数。入力情報は1フレームに1回処理されるため、数値が低いと入力遅延も発生します。
 FPS = 120
 
-gazo = "honoo.png"
 
 ############################
 ### スプライトクラス継承
@@ -71,6 +70,7 @@ class MySprite(pygame.sprite.Sprite):
 
 
 
+
 class FrontEnd(object):
     """ Maintains the Tello display and moves it through the keyboard keys.
         Press escape key to quit.
@@ -102,12 +102,28 @@ class FrontEnd(object):
         pygame.display.set_caption("Tello video stream")
         self.screen = pygame.display.set_mode([960, 720])
 
-        self.img1 = MySprite(gazo,   0,   0, 8, 2)
-        self.img2 = MySprite(gazo, 100, 100, 6, 4)
-        self.img3 = MySprite(gazo, 200, 200, 4, 6)
-        self.img4 = MySprite(gazo, 300, 300, 2, 8)
-
+        # ドラゴンエフェクト
+        self.img1 = MySprite("honoo.png",   0,   0, 8, 2)
+        self.img2 = MySprite("honoo.png", 100, 100, 6, 4)
+        self.img3 = MySprite("honoo.png", 200, 200, 4, 6)
+        self.img4 = MySprite("honoo.png", 300, 300, 2, 8)
         self.cry_sound = pygame.mixer.Sound("dragon.mp3")
+
+        # クラゲエフェクト
+        self.img_k1 = MySprite("kaminari.png",   0,   0, 8, 2)
+        self.img_k2 = MySprite("kaminari.png", 100, 100, 6, 4)
+        self.img_k3 = MySprite("kaminari.png", 200, 200, 4, 6)
+        self.img_k4 = MySprite("kaminari.png", 300, 300, 2, 8)
+        self.cry_sound_kurage = pygame.mixer.Sound("kaminari.mp3")
+
+        # 鳥エフェクト
+        self.img_t1 = MySprite("kaze.png",   0,   0, 8, 2)
+        self.img_t2 = MySprite("kaze.png", 100, 100, 6, 4)
+        self.img_t3 = MySprite("kaze.png", 200, 200, 4, 6)
+        self.img_t4 = MySprite("kaze.png", 300, 300, 2, 8)
+        self.cry_sound_tori = pygame.mixer.Sound("tori.mp3")
+
+
 
         ### グループ設定
         self.img_grp = pygame.sprite.Group()
@@ -146,6 +162,7 @@ class FrontEnd(object):
 
         should_stop = False
         while not should_stop:
+
 
             for event in pygame.event.get():
                 if event.type == pygame.USEREVENT + 1:
@@ -216,9 +233,11 @@ class FrontEnd(object):
             self.img_grp = pygame.sprite.Group(self.img1, self.img2, self.img3, self.img4)
             self.cry_sound.play()
         elif key == pygame.K_k:
-            gazo = "kaminari.png"
+            self.img_grp = pygame.sprite.Group(self.img_k1, self.img_k2, self.img_k3, self.img_k4)
+            self.cry_sound_kurage.play()
         elif key == pygame.K_b:
-            gazo = "kaze.png"
+            self.img_grp = pygame.sprite.Group(self.img_t1, self.img_t2, self.img_t3, self.img_t4)
+            self.cry_sound_tori.play()
 
 
     def keyup(self, key):
@@ -242,6 +261,10 @@ class FrontEnd(object):
             not self.tello.land()
             self.send_rc_control = False
         elif key == pygame.K_m:
+            self.img_grp = pygame.sprite.Group()
+        elif key == pygame.K_k:
+            self.img_grp = pygame.sprite.Group()
+        elif key == pygame.K_b:
             self.img_grp = pygame.sprite.Group()
 
 

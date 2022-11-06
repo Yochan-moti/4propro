@@ -80,12 +80,12 @@
       if (t.value=="鳥モードOFF") {
         t.value="鳥モードON";
         URL = URL_tori;
-        pata = 4;
+        pata = 6;
 
       }else if (t.value=="鳥モードON") {
         t.value="鳥モードOFF";
         URL = URL_dragon;
-        pata = 4;
+        pata = 3;
       }
     }
     　　　　
@@ -101,8 +101,8 @@
           var data=[];
 
           var fly=false;
-
           var push=false;
+          var yura=false;
 
           var count=0;
 
@@ -158,21 +158,27 @@
                 console.log(data);
                 var n = data.length-1;
                 var x = 0;
+
                 if(data[n]==="RIGHT" && fly === true){
                   webSocket.send("RIGHT");          //右前
                   count = 0;
+                  yura = false;
                 }else if(data[n]==="LEFT" && fly === true){
                   webSocket.send("LEFT");           //左前
                   count = 0;
+                  yura = false;
                 }else if(data[n]==="GO" && fly === true){
                   webSocket.send("GO");           //直進
                   count = 0;
+                  yura = false;
                 }else if(data[n]==="L_ROTATE" && fly === true){
                   webSocket.send("L_ROTATE");           //左回転
                   count = 0;
+                  yura = false;
                 }else if(data[n]==="R_ROTATE" && fly === true){
                   webSocket.send("R_ROTATE");           //右回転
                   count = 0;
+                  yura = false;
                 }else{
                   // パタパタ認識
                   for (var i = 0; i < data.length-1; i++) {
@@ -182,25 +188,32 @@
                     }
                   }
 
-                  if(fly===true){
-                    count++;
-                    webSocket.send("finish");
-                  }
-
-                  if(x >= pata && fly === false){
-                    fly = true;
-                    webSocket.send("FLY");    //着陸状態でパタパタが3回以上　離陸
-                  }
-
                   if(x >= pata && fly === true && count>=9){
-                    webSocket.send("YURA");    //離陸状態でパタパタが3回以上　ゆらゆら
+                    yura = true;
                     count = 0;
-                  }
+                    if(URL === URL_kurage){
+                      webSocket.send("kurage_YURA");
+                    }else if(URL === URL_tori){
+                      webSocket.send("tori_YURA");
+                    }else{
+                      webSocket.send("YURA");    //離陸状態でパタパタが3回以上　ゆらゆら
+                    }
 
-                  if(x < pata &&fly === true && count>=9){
-                    fly = false;
-                    count = 0;
+                  }else if(x < pata &&fly === true && count>=9){
                     webSocket.send("LAND");    //離陸状態でパタパタが3回未満　着陸
+                    fly = false;
+                    yura = false;
+                    count = 0;
+
+                  }else if(fly === true){
+                    count++;
+                    if(yura === false){
+                      webSocket.send("finish");
+                    }
+                  }else if(x >= pata && fly === false){
+                    fly = true;
+                    yura = false;
+                    webSocket.send("FLY");    //着陸状態でパタパタが3回以上　離陸
                   }
 
                 }

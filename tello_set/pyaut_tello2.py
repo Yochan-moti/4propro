@@ -15,6 +15,7 @@ async def hello():
 
             data[0] = data[1]
             data[1] = greeting
+            # print(data)
 
             pyautogui.moveTo(600, 500)
             pyautogui.click()
@@ -24,9 +25,17 @@ async def hello():
                 break
 
             if data[0] != data[1]:
+                if data[0]=="kurage_YURA":
+                    print("<<< クラゲゆらゆら終わり")
+                    pyautogui.keyUp("k")
+                if data[0]=="tori_YURA":
+                    print("<<< 鳥ゆらゆら終わり")
+                    pyautogui.keyUp("b")
                 if data[0]=="YURA":
                     print("<<< ゆらゆら終わり")
                     pyautogui.keyUp("m")
+
+
                 if data[0]=="RIGHT":
                     print("<<< 右終わり")
                     pyautogui.keyUp("right")
@@ -59,6 +68,14 @@ async def hello():
                 if data[1]=="YURA":
                     print("<<< ゆらゆら")
                     pyautogui.keyDown("m")
+                if data[1]=="kurage_YURA":
+                    print("<<< クラゲゆらゆら")
+                    pyautogui.keyDown("k")
+                if data[1]=="tori_YURA":
+                    print("<<< 鳥ゆらゆら")
+                    pyautogui.keyDown("b")
+
+
                 if data[1]=="RIGHT":
                     print("<<< 右")
                     pyautogui.keyDown("right")
@@ -80,12 +97,12 @@ async def hello():
 
                 if data[1]=="kurage":
                     print("<<< クラゲモードON")
-                    pyautogui.keyDown("k")
-                    pyautogui.keyUp("k")
+                    # pyautogui.keyDown("k")
+                    # pyautogui.keyUp("k")
                 if data[1]=="tori":
                     print("<<< 鳥モードON")
-                    pyautogui.keyDown("b")
-                    pyautogui.keyUp("b")
+                    # pyautogui.keyDown("b")
+                    # pyautogui.keyUp("b")
 
 
 
