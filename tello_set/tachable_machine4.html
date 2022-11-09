@@ -3,16 +3,25 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title> WebSocket通信 </title>
+    <title> あにまるドローン通信 </title>
     <script type="text/javascript">
         // Web Socketオブジェクト生成
         var webSocket = new WebSocket("ws://127.0.0.1:30000");
+
+        var tex=[0,0];
+
         webSocket.onopen = function() {
            document.getElementById('show').innerHTML += "接続しました。" + "<br/>";
             // onmessageリスナー
             webSocket.onmessage = function(event) {
                 // 取得＆表示
-                document.getElementById('show').innerHTML += event.data + "<br/>";
+                tex.push(event.data);
+                tex.shift()
+                if(tex[0] != tex[1] && tex[1] != "finish"){
+                  document.getElementById('show').innerHTML += tex[1] + "<br/>";
+                }
+                var obj = document.getElementById('show');
+                obj.scrollTop = obj.scrollHeight;
             }
         };
         var sendMsg = function(val) {
@@ -26,16 +35,12 @@
 </head>
 
 <body>
-    <div style="width:500px;height:200px;overflow-y:auto;border:1px solid #333;" id="show"></div>
-    <input type="text" size="80" id="msg" name="msg" />
-    <input type="button" value="送信" onclick="sendMsg();" />
+    <!-- <div style="width:500px;height:200px;overflow-y:auto;border:1px solid #333;" id="show"></div> -->
 
 <!-- ここからteachablemachine -->
 
-    <div>Teachable Machine Pose Model</div>
+    <div>あにドロジェスチャー</div>
     <form>
-      <!-- <input type="button" id="myButton" value="鳥モードOFF"
-       onclick="Buttontoggle();"> -->
       <input type="button" id="myButton1" value="クラゲモードOFF"
        onclick="Buttontoggle1();">
       <input type="button" id="myButton2" value="鳥モードOFF"
@@ -47,6 +52,9 @@
 
     <div><canvas id="canvas"></canvas></div>
     <div id="label-container"></div>
+
+    <div style="width:400px;height:50px;overflow-y:auto;border:1px solid #333;" id="show"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
     <script type="text/javascript">
@@ -80,7 +88,7 @@
       if (t.value=="鳥モードOFF") {
         t.value="鳥モードON";
         URL = URL_tori;
-        pata = 6;
+        pata = 8;
 
       }else if (t.value=="鳥モードON") {
         t.value="鳥モードOFF";
@@ -105,6 +113,7 @@
           var yura=false;
 
           var count=0;
+          var c_fly=0;
 
           async function init() {
             const modelURL = URL + "model.json";
@@ -129,14 +138,14 @@
             await webcam.play();
             window.requestAnimationFrame(loop);
 
-            if(URL === URL_kurage){
+            if(URL === URL_dragon){
+              webSocket.send("dragon");
+            }else if(URL === URL_kurage){
               webSocket.send("kurage");
-            }
-            if(URL === URL_tori){
+            }else if(URL === URL_tori){
               webSocket.send("tori");
             }
 
-            // append/get elements to the DOM
             // DOMに要素を追加/取得する
             const canvas = document.getElementById("canvas");
             canvas.width = size;
@@ -150,12 +159,17 @@
 
             //--------タイマー処理----------------
             var manager = async function () {
-              if (data !=　[] && push===true) {// 入れ替わりがなければ以前のデータ配列をずっと使ってしまうため、データの追加が行われれば認識が実行される
+              if(fly===true && c_fly<20){
+                c_fly++;
+              }
+              // 入れ替わりがなければ以前のデータ配列をずっと使ってしまうため、データの追加が行われれば認識が実行される
+              // 離陸後、5秒後に送信再会(c_fly=15)
+              if (data !=　[] && push===true && (fly===false||c_fly>=15)) {
                 while(data.length>30){     // データの数を調整(30個以内に)
                   data.shift();　　　　　　　
                 }
 
-                console.log(data);
+                // console.log(data);
                 var n = data.length-1;
                 var x = 0;
 
@@ -204,6 +218,7 @@
                     fly = false;
                     yura = false;
                     count = 0;
+                    c_fly = 0;
 
                   }else if(fly === true){
                     count++;

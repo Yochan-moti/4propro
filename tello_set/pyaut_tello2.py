@@ -39,11 +39,11 @@ async def hello():
                 if data[0]=="RIGHT":
                     print("<<< 右終わり")
                     pyautogui.keyUp("right")
-                    pyautogui.keyUp("up")
+                    # pyautogui.keyUp("up")
                 if data[0]=="LEFT":
                     print("<<< 左終わり")
                     pyautogui.keyUp("left")
-                    pyautogui.keyUp("up")
+                    # pyautogui.keyUp("up")
                 if data[0]=="R_ROTATE":
                     print("<<< 右回転終わり")
                     pyautogui.keyUp("d")
@@ -79,11 +79,11 @@ async def hello():
                 if data[1]=="RIGHT":
                     print("<<< 右")
                     pyautogui.keyDown("right")
-                    pyautogui.keyDown("up")
+                    # pyautogui.keyDown("up")
                 if data[1]=="LEFT":
                     print("<<< 左")
                     pyautogui.keyDown("left")
-                    pyautogui.keyDown("up")
+                    # pyautogui.keyDown("up")
                 if data[1]=="R_ROTATE":
                     print("<<< 右回転")
                     pyautogui.keyDown("d")
@@ -94,15 +94,18 @@ async def hello():
                     print("<<< 直進")
                     pyautogui.keyDown("up")
 
-
+                if data[1]=="dragon":
+                    print("<<< ドラゴンモードON")
+                    pyautogui.keyDown("x")
+                    pyautogui.keyUp("x")
                 if data[1]=="kurage":
                     print("<<< クラゲモードON")
-                    pyautogui.keyDown("r")
-                    pyautogui.keyUp("r")
+                    pyautogui.keyDown("y")
+                    pyautogui.keyUp("y")
                 if data[1]=="tori":
                     print("<<< 鳥モードON")
-                    pyautogui.keyDown("i")
-                    pyautogui.keyUp("i")
+                    pyautogui.keyDown("z")
+                    pyautogui.keyUp("z")
 
 
 
