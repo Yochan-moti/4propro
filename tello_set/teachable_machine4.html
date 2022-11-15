@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title> あにまるドローン通信 </title>
+    <script type="text/javascript">
+        // Web Socketオブジェクト生成
+        var webSocket = new WebSocket("ws://127.0.0.1:30000");
+
+        var tex=[0,0];
+
+        webSocket.onopen = function() {
+           document.getElementById('show').innerHTML += "接続しました。" + "<br/>";
+            // onmessageリスナー
+            webSocket.onmessage = function(event) {
+                // 取得＆表示
+                tex.push(event.data);
+                tex.shift()
+                if(tex[0] != tex[1] && tex[1] != "finish"){
+                  document.getElementById('show').innerHTML += tex[1] + "<br/>";
+                }
+                var obj = document.getElementById('show');
+                obj.scrollTop = obj.scrollHeight;
+            }
+        };
+        var sendMsg = function(val) {
+            var inputElement = document.getElementById('msg');
+            // 送信
+            webSocket.send(inputElement.value);
+            // クリア
+            inputElement.value = "";
+        }
+    </script>
+</head>
+
+<body>
+
+<!-- ここからteachablemachine -->
+
+    <div><img src = "logologo.png" alt="あにまるドローン" width="396" height="52"></div>
+    <form>
+      <input type="button" id="myButton1" value="クラゲモードOFF"
+       onclick="Buttontoggle1();">
+      <input type="button" id="myButton2" value="鳥モードOFF"
+       onclick="Buttontoggle2();">
+    </form>
+
+
+    <br><button type="button" onclick="init()">スタート</button>
+
+    <div><canvas id="canvas"></canvas></div>
+    <div id="label-container"></div>
+
+    <div style="width:400px;height:50px;overflow-y:auto;border:1px solid #333;" id="show"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
+    <script type="text/javascript">
+    var URL = "https://teachablemachine.withgoogle.com/models/n2-NHB4zS/";
+
+    var URL_dragon = "https://teachablemachine.withgoogle.com/models/n2-NHB4zS/";
+
+    var URL_kurage = "https://teachablemachine.withgoogle.com/models/fC8as-mMM/";
+
+    var URL_tori = "https://teachablemachine.withgoogle.com/models/SSW9KZPeH/";
+
+    var pata = 3;
+
+    function Buttontoggle1()
+    {
+      var t = document.getElementById("myButton1");
+      if (t.value=="クラゲモードOFF") {
+        t.value="クラゲモードON";
+        URL = URL_kurage;
+        pata = 2;
+
+      }else if (t.value=="クラゲモードON") {
+        t.value="クラゲモードOFF";
+        URL = URL_dragon;
+        pata = 3;
+      }
+    }
+    function Buttontoggle2()
+    {
+      var t = document.getElementById("myButton2");
+      if (t.value=="鳥モードOFF") {
+        t.value="鳥モードON";
+        URL = URL_tori;
+        pata = 8;
+
+      }else if (t.value=="鳥モードON") {
+        t.value="鳥モードOFF";
+        URL = URL_dragon;
+        pata = 3;
+      }
+    }
+    　　　　
+
+          // More API functions here:
+          // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/pose
+          // the link to your model provided by Teachable Machine export panel
+          // const URL = "https://teachablemachine.withgoogle.com/models/gRWcvQapv/";
+          // const URL = "https://teachablemachine.withgoogle.com/models/A7O1o4hJ1/";
+
+          let model, webcam, ctx, labelContainer, maxPredictions;
+
+          var data=[];
+
+          var fly=false;
+          var push=false;
+          var yura=false;
+
+          var count=0;
+          var c_fly=0;
+
+          async function init() {
+            const modelURL = URL + "model.json";
+            const metadataURL = URL + "metadata.json";
+
+
+            // load the model and metadata
+            // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
+            // Note: the pose library adds a tmPose object to your window (window.tmPose)
+            //モデルとメタデータをロードする
+            //ファイルピッカーからのファイルをサポートするために、APIのtmImage.loadFromFiles()を参照してください。
+            //注意: pose ライブラリは、tmPose オブジェクトをウィンドウに追加します (window.tmPose)
+            model = await tmPose.load(modelURL, metadataURL);
+            maxPredictions = model.getTotalClasses();//モデルの数
+
+            // Convenience function to setup a webcam
+            // ウェブカメラをセットアップするための便利な機能
+            const size = 400;
+            const flip = true; // whether to flip the webcam ウェブカメラを反転させるかどうか
+            webcam = new tmPose.Webcam(size, size, flip); // width, height, flip
+            await webcam.setup(); // request access to the webcam ウェブカメラへのアクセスを要求する
+            await webcam.play();
+            window.requestAnimationFrame(loop);
+
+            if(URL === URL_dragon){
+              webSocket.send("dragon");
+            }else if(URL === URL_kurage){
+              webSocket.send("kurage");
+            }else if(URL === URL_tori){
+              webSocket.send("tori");
+            }
+
+            // DOMに要素を追加/取得する
+            const canvas = document.getElementById("canvas");
+            canvas.width = size;
+            canvas.height = size;
+            ctx = canvas.getContext("2d");
+            labelContainer = document.getElementById("label-container");
+            for (let i = 0; i < maxPredictions; i++) { // and class labels
+              labelContainer.appendChild(document.createElement("div"));
+            }
+
+
+            //--------タイマー処理----------------
+            var manager = async function () {
+              if(fly===true && c_fly<20){
+                c_fly++;
+              }
+              // 入れ替わりがなければ以前のデータ配列をずっと使ってしまうため、データの追加が行われれば認識が実行される
+              // 離陸後、5秒後に送信再会(c_fly=15)
+              if (data !=　[] && push===true && (fly===false||c_fly>=15)) {
+                while(data.length>30){     // データの数を調整(30個以内に)
+                  data.shift();　　　　　　　
+                }
+
+                // console.log(data);
+                var n = data.length-1;
+                var x = 0;
+
+                if(data[n]==="RIGHT" && fly === true){
+                  webSocket.send("RIGHT");          //右前
+                  count = 0;
+                  yura = false;
+                }else if(data[n]==="LEFT" && fly === true){
+                  webSocket.send("LEFT");           //左前
+                  count = 0;
+                  yura = false;
+                }else if(data[n]==="GO" && fly === true){
+                  webSocket.send("GO");           //直進
+                  count = 0;
+                  yura = false;
+                }else if(data[n]==="L_ROTATE" && fly === true){
+                  webSocket.send("L_ROTATE");           //左回転
+                  count = 0;
+                  yura = false;
+                }else if(data[n]==="R_ROTATE" && fly === true){
+                  webSocket.send("R_ROTATE");           //右回転
+                  count = 0;
+                  yura = false;
+                }else{
+                  // パタパタ認識
+                  for (var i = 0; i < data.length-1; i++) {
+                    if((data[i]==="UP"&&data[i+1]==="DOWN")
+                    ||(data[i]==="DOWN"&&data[i+1]==="UP")){
+                      x++;
+                    }
+                  }
+
+                  if(x >= pata && fly === true && count>=9){
+                    yura = true;
+                    count = 0;
+                    if(URL === URL_kurage){
+                      webSocket.send("kurage_YURA");
+                    }else if(URL === URL_tori){
+                      webSocket.send("tori_YURA");
+                    }else{
+                      webSocket.send("YURA");    //離陸状態でパタパタが3回以上　ゆらゆら
+                    }
+
+                  }else if(x < pata &&fly === true && count>=9){
+                    webSocket.send("LAND");    //離陸状態でパタパタが3回未満　着陸
+                    fly = false;
+                    yura = false;
+                    count = 0;
+                    c_fly = 0;
+
+                  }else if(fly === true){
+                    count++;
+                    if(yura === false){
+                      webSocket.send("finish");
+                    }
+                  }else if(x >= pata && fly === false){
+                    fly = true;
+                    yura = false;
+                    webSocket.send("FLY");    //着陸状態でパタパタが3回以上　離陸
+                  }
+
+                }
+              }
+              push = false
+            }
+            console.log('開始');
+            await new Promise(s => setTimeout(s, 4000));
+            console.log('開始から4秒経過');
+
+            setInterval(manager, 1000/3);
+            //-----------------------------------
+
+          }
+
+          var a = 0;
+
+          async function loop(timestamp) {
+            await new Promise(loop => setTimeout(loop, 1000/90));
+
+            webcam.update(); // update the webcam frame
+            await predict();
+            window.requestAnimationFrame(loop);
+          }
+
+          async function predict() {
+             // Prediction #1: run input through posenet
+             // estimatePose can take in an image, video or canvas html element
+             // 予測1：posenetで入力を実行する推定ポーズは、画像、ビデオ、またはキャンバスのhtml要素を取り込むことができます。
+             const { pose, posenetOutput } = await model.estimatePose(webcam.canvas);
+             // Prediction 2: run input through teachable machine classification model
+             // 予測2：ティーチングマシン分類モデルによる入力の実行
+             const prediction = await model.predict(posenetOutput);
+
+             for (let i = 0; i < maxPredictions; i++) {
+                 const classPrediction =
+                     prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+                 labelContainer.childNodes[i].innerHTML = classPrediction;
+
+                 if(prediction[i].className==="UP"){
+                   if(prediction[i].probability.toFixed(2)==="1.00"){
+                     data.push("UP");
+                     push=true;
+                   }
+                 }
+                 if(prediction[i].className==="DOWN"){
+                   if(prediction[i].probability.toFixed(2)==="1.00"){
+                     data.push("DOWN");
+                     push=true;
+                   }
+                 }
+                 if(prediction[i].className==="RIGHT"){
+                   if(prediction[i].probability.toFixed(2)==="1.00"){
+                     data.push("RIGHT");
+                     push=true;
+                   }
+                 }
+                 if(prediction[i].className==="LEFT"){
+                   if(prediction[i].probability.toFixed(2)==="1.00"){
+                     data.push("LEFT");
+                     push=true;
+                   }
+                 }
+                 if(prediction[i].className==="GO"){
+                   if(prediction[i].probability.toFixed(2)==="1.00"){
+                     data.push("GO");
+                     push=true;
+                   }
+                 }
+                 if(prediction[i].className==="L_ROTATE"){
+                   if(prediction[i].probability.toFixed(2)==="1.00"){
+                     data.push("L_ROTATE");
+                     push=true;
+                   }
+                 }
+                 if(prediction[i].className==="R_ROTATE"){
+                   if(prediction[i].probability.toFixed(2)==="1.00"){
+                     data.push("R_ROTATE");
+                     push=true;
+                   }
+                 }
+
+             }
+
+             drawPose(pose);
+          }
+
+
+
+          function drawPose(pose) {
+             if (webcam.canvas) {
+                 ctx.drawImage(webcam.canvas, 0, 0);
+                 if (pose) {
+                     const minPartConfidence = 0.5;
+                     tmPose.drawKeypoints(pose.keypoints, minPartConfidence, ctx);
+                     tmPose.drawSkeleton(pose.keypoints, minPartConfidence, ctx);
+                 }
+             }
+          }
+
+    </script>
+</body>
+
+</html>

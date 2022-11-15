@@ -25,14 +25,14 @@ class MySprite(pygame.sprite.Sprite):
     ############################
     ### 初期化メソッド(ファイル名,X軸,Y軸,X軸移動,Y軸移動)
     ############################
-    def __init__(self, name, x, y, mv_x, mv_y):
+    def __init__(self, name, x, y, mv_x, mv_y, size_x, size_y):
         pygame.sprite.Sprite.__init__(self)
 
         ### 透過変換でファイル読み込み
         self.image = pygame.image.load(name).convert_alpha()
 
         ### 画像サイズ変更
-        self.image = pygame.transform.scale(self.image, (200, 200))
+        self.image = pygame.transform.scale(self.image, (size_x, size_y))
 
         ### 画像サイズ取得
         width  = self.image.get_width()
@@ -98,45 +98,49 @@ class FrontEnd(object):
         # Init pygame
         pygame.init()
 
-        self.fontS = pygame.font.Font("font/JKG-L_3.ttf", 20)
-
         self.mode_text = ""
+        self.mode_jelly = False
 
         # Creat pygame window
         pygame.display.set_caption("あにまるドローン")
         self.screen = pygame.display.set_mode([960, 720])
 
         # ドラゴンエフェクト
-        self.img1 = MySprite("honoo.png",   0,   0, 8, 2)
-        self.img2 = MySprite("honoo.png", 100, 100, 6, 4)
-        self.img3 = MySprite("honoo.png", 200, 200, 4, 6)
-        self.img4 = MySprite("honoo.png", 300, 300, 2, 8)
+        self.img1 = MySprite("honoo.png",   0,   0, 8, 2, 200, 200)
+        self.img2 = MySprite("honoo.png", 100, 100, 6, 4, 200, 200)
+        self.img3 = MySprite("honoo.png", 200, 200, 4, 6, 200, 200)
+        self.img4 = MySprite("honoo.png", 300, 300, 2, 8, 200, 200)
         self.cry_sound = pygame.mixer.Sound("dragon.mp3")
 
         # クラゲエフェクト
-        self.img_k1 = MySprite("kaminari.png",   0,   0, 8, 2)
-        self.img_k2 = MySprite("kaminari.png", 100, 100, 6, 4)
-        self.img_k3 = MySprite("kaminari.png", 200, 200, 4, 6)
-        self.img_k4 = MySprite("kaminari.png", 300, 300, 2, 8)
+        self.img_k1 = MySprite("kaminari.png",   0,   0, 8, 2, 200, 200)
+        self.img_k2 = MySprite("kaminari.png", 100, 100, 6, 4, 200, 200)
+        self.img_k3 = MySprite("kaminari.png", 200, 200, 4, 6, 200, 200)
+        self.img_k4 = MySprite("kaminari.png", 300, 300, 2, 8, 200, 200)
         self.cry_sound_kurage = pygame.mixer.Sound("kaminari.mp3")
         # self.kurage_BGM = pygame.mixer.Sound("kurage_BGM.mp3")
-        self.bg = pygame.image.load("haikei.png").convert_alpha()
 
 
         # 鳥エフェクト
-        self.img_t1 = MySprite("kaze.png",   0,   0, 8, 2)
-        self.img_t2 = MySprite("kaze.png", 100, 100, 6, 4)
-        self.img_t3 = MySprite("kaze.png", 200, 200, 4, 6)
-        self.img_t4 = MySprite("kaze.png", 300, 300, 2, 8)
+        self.img_t1 = MySprite("kaze.png",   0,   0, 8, 2, 200, 200)
+        self.img_t2 = MySprite("kaze.png", 100, 100, 6, 4, 200, 200)
+        self.img_t3 = MySprite("kaze.png", 200, 200, 4, 6, 200, 200)
+        self.img_t4 = MySprite("kaze.png", 300, 300, 2, 8, 200, 200)
         self.cry_sound_tori = pygame.mixer.Sound("tori.mp3")
+
+
+        # 方向エフェクト
+        self.img_left = MySprite("left.png", 10, 360, 0, 0, 100, 100)
+        self.img_right = MySprite("right.png", 960 - 10, 360, 0, 0, 100, 100)
+        self.img_lrotate = MySprite("rotate_l.png", 10, 360, 0, 0, 100, 100)
+        self.img_rrotate = MySprite("rotate_r.png", 960 - 10, 360, 0, 0, 100, 100)
+        self.img_go = MySprite("go.png", 450, 10, 0, 0, 100, 100)
 
 
 
         ### グループ設定
         self.img_grp = pygame.sprite.Group()
-        self.img_grp_haikei = pygame.sprite.Group()
 
-        # Init Tello object that interacts with the Tello drone
         # Telloドローンと対話するためのTelloオブジェクトを初期化する。
         self.tello = Tello()
 
@@ -168,11 +172,11 @@ class FrontEnd(object):
 
         frame_read = self.tello.get_frame_read()
 
-
-
-
         should_stop = False
         while not should_stop:
+
+            # if self.mode_jelly:
+
 
 
             for event in pygame.event.get():
@@ -193,8 +197,6 @@ class FrontEnd(object):
 
             self.screen.fill([0, 0, 0])
 
-
-
             frame = frame_read.frame
             # battery n. 电池
             text = "Battery: {}%".format(self.tello.get_battery())
@@ -208,8 +210,6 @@ class FrontEnd(object):
 
             frame = pygame.surfarray.make_surface(frame)
             self.screen.blit(frame, (0, 0))
-
-            self.screen.blit(self.bg, (0, 0))
 
             ### スプライトを更新
             self.img_grp.update()
@@ -230,22 +230,29 @@ class FrontEnd(object):
         Arguments:
             key: pygame key
         """
-        if key == pygame.K_UP:  # set forward velocity 前
+        if key == pygame.K_UP:  # 前
             self.for_back_velocity = S
-        elif key == pygame.K_DOWN:  # set backward velocity　後ろ
+            self.img_grp = pygame.sprite.Group(self.img_go)
+        elif key == pygame.K_DOWN:  # 後ろ
             self.for_back_velocity = -S
-        elif key == pygame.K_LEFT:  # set left velocity　左
+        elif key == pygame.K_LEFT:  # 左前
+            self.for_back_velocity = S
             self.left_right_velocity = -S
-        elif key == pygame.K_RIGHT:  # set right velocity　右
+            self.img_grp = pygame.sprite.Group(self.img_left)
+        elif key == pygame.K_RIGHT:  # 右前
+            self.for_back_velocity = S
             self.left_right_velocity = S
-        elif key == pygame.K_w:  # set up velocity　上昇
+            self.img_grp = pygame.sprite.Group(self.img_right)
+        elif key == pygame.K_w:  # 上昇
             self.up_down_velocity = S
-        elif key == pygame.K_s:  # set down velocity　下降
+        elif key == pygame.K_s:  # 下降
             self.up_down_velocity = -S
-        elif key == pygame.K_a:  # set yaw counter clockwise velocity　反時計回り
+        elif key == pygame.K_a:  # 反時計回り
             self.yaw_velocity = -S
-        elif key == pygame.K_d:  # set yaw clockwise velocity　時計回り
+            self.img_grp = pygame.sprite.Group(self.img_lrotate)
+        elif key == pygame.K_d:  # 時計回り
             self.yaw_velocity = S
+            self.img_grp = pygame.sprite.Group(self.img_rrotate)
 
         elif key == pygame.K_m:  # ドラゴンエフェクト＆効果音
             self.img_grp = pygame.sprite.Group(self.img1, self.img2, self.img3, self.img4)
@@ -257,11 +264,15 @@ class FrontEnd(object):
             self.img_grp = pygame.sprite.Group(self.img_t1, self.img_t2, self.img_t3, self.img_t4)
             self.cry_sound_tori.play()
 
-        elif key == pygame.K_r:
+        elif key == pygame.K_x:
+            self.mode_text = "Dragon mode"
+            self.mode_jelly = False
+        elif key == pygame.K_y:
             self.mode_text = "JellyFish mode"
-        #     self.screen.blit(self.bg, (0, 0))
-        #     pygame.display.update()
-        #     self.kurage_BGM.play(-1)
+            self.mode_jelly = True
+        elif key == pygame.K_z:
+            self.mode_text = "Bird mode"
+            self.mode_jelly = False
 
 
     def keyup(self, key):
@@ -272,27 +283,31 @@ class FrontEnd(object):
         """
         if key == pygame.K_UP or key == pygame.K_DOWN:  # set zero forward/backward velocity
             self.for_back_velocity = 0
+            self.img_grp = pygame.sprite.Group()
         elif key == pygame.K_LEFT or key == pygame.K_RIGHT:  # set zero left/right velocity
+            self.for_back_velocity = 0
             self.left_right_velocity = 0
+            self.img_grp = pygame.sprite.Group()
         elif key == pygame.K_w or key == pygame.K_s:  # set zero up/down velocity
             self.up_down_velocity = 0
+            self.img_grp = pygame.sprite.Group()
         elif key == pygame.K_a or key == pygame.K_d:  # set zero yaw velocity
             self.yaw_velocity = 0
+            self.img_grp = pygame.sprite.Group()
         elif key == pygame.K_t:  # takeoff
             self.tello.takeoff()
             self.send_rc_control = True
+            self.img_grp = pygame.sprite.Group()
         elif key == pygame.K_l:  # land
             not self.tello.land()
             self.send_rc_control = False
+            self.img_grp = pygame.sprite.Group()
         elif key == pygame.K_m:
             self.img_grp = pygame.sprite.Group()
         elif key == pygame.K_k:
             self.img_grp = pygame.sprite.Group()
         elif key == pygame.K_b:
             self.img_grp = pygame.sprite.Group()
-
-        # elif key == pygame.K_r:
-        #     self.screen.blit(self.bg, (0, 0))
 
 
     def update(self):

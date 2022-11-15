@@ -35,11 +35,14 @@
 </head>
 
 <body>
-    <!-- <div style="width:500px;height:200px;overflow-y:auto;border:1px solid #333;" id="show"></div> -->
 
 <!-- ここからteachablemachine -->
 
     <div>あにドロジェスチャー</div>
+    <p>
+      <input type="button" value="現在のモード停止" onclick="window.location.reload();" />
+    </p>
+
     <form>
       <input type="button" id="myButton1" value="クラゲモードOFF"
        onclick="Buttontoggle1();">
@@ -48,7 +51,7 @@
     </form>
 
 
-    <br><button type="button" onclick="init()">Start</button>
+    <br><button type="button" onclick="init()">すたーと</button>
 
     <div><canvas id="canvas"></canvas></div>
     <div id="label-container"></div>
