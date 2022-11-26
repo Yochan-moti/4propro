@@ -105,35 +105,35 @@ class FrontEnd(object):
         self.screen = pygame.display.set_mode([960, 720])
 
         # ドラゴンエフェクト
-        self.img1 = MySprite("honoo.png",   0,   0, 8, 2, 200, 200)
-        self.img2 = MySprite("honoo.png", 100, 100, 6, 4, 200, 200)
-        self.img3 = MySprite("honoo.png", 200, 200, 4, 6, 200, 200)
-        self.img4 = MySprite("honoo.png", 300, 300, 2, 8, 200, 200)
-        self.cry_sound = pygame.mixer.Sound("dragon.mp3")
+        self.img1 = MySprite("./effect/honoo.png",   0,   0, 8, 2, 200, 200)
+        self.img2 = MySprite("./effect/honoo.png", 100, 100, 6, 4, 200, 200)
+        self.img3 = MySprite("./effect/honoo.png", 200, 200, 4, 6, 200, 200)
+        self.img4 = MySprite("./effect/honoo.png", 300, 300, 2, 8, 200, 200)
+        self.cry_sound = pygame.mixer.Sound("./music/dragon.mp3")
 
         # クラゲエフェクト
-        self.img_k1 = MySprite("kaminari.png",   0,   0, 8, 2, 200, 200)
-        self.img_k2 = MySprite("kaminari.png", 100, 100, 6, 4, 200, 200)
-        self.img_k3 = MySprite("kaminari.png", 200, 200, 4, 6, 200, 200)
-        self.img_k4 = MySprite("kaminari.png", 300, 300, 2, 8, 200, 200)
-        self.cry_sound_kurage = pygame.mixer.Sound("kaminari.mp3")
+        self.img_k1 = MySprite("./effect/kaminari.png",   0,   0, 8, 2, 200, 200)
+        self.img_k2 = MySprite("./effect/kaminari.png", 100, 100, 6, 4, 200, 200)
+        self.img_k3 = MySprite("./effect/kaminari.png", 200, 200, 4, 6, 200, 200)
+        self.img_k4 = MySprite("./effect/kaminari.png", 300, 300, 2, 8, 200, 200)
+        self.cry_sound_kurage = pygame.mixer.Sound("./music/kaminari.mp3")
         # self.kurage_BGM = pygame.mixer.Sound("kurage_BGM.mp3")
 
 
         # 鳥エフェクト
-        self.img_t1 = MySprite("kaze.png",   0,   0, 8, 2, 200, 200)
-        self.img_t2 = MySprite("kaze.png", 100, 100, 6, 4, 200, 200)
-        self.img_t3 = MySprite("kaze.png", 200, 200, 4, 6, 200, 200)
-        self.img_t4 = MySprite("kaze.png", 300, 300, 2, 8, 200, 200)
-        self.cry_sound_tori = pygame.mixer.Sound("tori.mp3")
+        self.img_t1 = MySprite("./effect/kaze.png",   0,   0, 8, 2, 200, 200)
+        self.img_t2 = MySprite("./effect/kaze.png", 100, 100, 6, 4, 200, 200)
+        self.img_t3 = MySprite("./effect/kaze.png", 200, 200, 4, 6, 200, 200)
+        self.img_t4 = MySprite("./effect/kaze.png", 300, 300, 2, 8, 200, 200)
+        self.cry_sound_tori = pygame.mixer.Sound("./music/tori.mp3")
 
 
         # 方向エフェクト
-        self.img_left = MySprite("left.png", 10, 360, 0, 0, 100, 100)
-        self.img_right = MySprite("right.png", 960 - 10, 360, 0, 0, 100, 100)
-        self.img_lrotate = MySprite("rotate_l.png", 10, 360, 0, 0, 100, 100)
-        self.img_rrotate = MySprite("rotate_r.png", 960 - 10, 360, 0, 0, 100, 100)
-        self.img_go = MySprite("go.png", 450, 10, 0, 0, 100, 100)
+        self.img_left = MySprite("./effect/left.png", 10, 360, 0, 0, 100, 100)
+        self.img_right = MySprite("./effect/right.png", 960 - 10, 360, 0, 0, 100, 100)
+        self.img_lrotate = MySprite("./effect/rotate_l.png", 10, 360, 0, 0, 100, 100)
+        self.img_rrotate = MySprite("./effect/rotate_r.png", 960 - 10, 360, 0, 0, 100, 100)
+        self.img_go = MySprite("./effect/go.png", 450, 10, 0, 0, 100, 100)
 
 
 

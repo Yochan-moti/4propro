@@ -163,9 +163,9 @@
               }
               // 入れ替わりがなければ以前のデータ配列をずっと使ってしまうため、データの追加が行われれば認識が実行される
               // 離陸後、5秒後に送信再会(c_fly=15)
-              if (data !=　[] && push===true && (fly===false||c_fly>=15)) {
+              if (data != [] && push===true && (fly===false||c_fly>=15)) {
                 while(data.length>30){     // データの数を調整(30個以内に)
-                  data.shift();　　　　　　　
+                  data.shift();
                 }
 
                 // console.log(data);
